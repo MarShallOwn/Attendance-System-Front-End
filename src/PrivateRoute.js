@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router";
-import authReducer from "../reducers/authReducer";
+import authReducer from "./reducers/authReducer";
 import {connect} from 'react-redux';
 
 

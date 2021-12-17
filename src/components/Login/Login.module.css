@@ -67,6 +67,10 @@
     margin-bottom: 3rem;
 }
 
+.label{
+    color: var(--gray-color);
+}
+
 .passwordDiv {
     margin-top: 2rem;
 }
@@ -78,6 +82,8 @@
 .forgotPassword{
     margin-top: 1.5rem;
     text-decoration: none;
+    color: var(--gray-color);
+    font-size: var(--smaller-size);
 }
 
 .okra{

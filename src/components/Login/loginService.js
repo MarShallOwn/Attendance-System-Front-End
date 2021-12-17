@@ -1,4 +1,4 @@
-import { regex } from "../regex";
+import { regex } from "../../regex";
 
 // checks the validation of the form
 export const handleValidation = (fields, setErrors) => {
