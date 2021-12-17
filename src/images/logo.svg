@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="171.543" height="40" viewBox="0 0 171.543 40">
+  <g id="Group_923" data-name="Group 923" transform="translate(-75.154 -47)">
+    <text id="ATMS" transform="translate(151.697 80)" font-size="35" font-family="ArialMT, Arial"><tspan x="0" y="0">ATMS</tspan></text>
+    <g id="Group_793" data-name="Group 793" transform="translate(-227.286 -273.231)">
+      <g id="Group_744" data-name="Group 744" transform="translate(302.44 320.231)">
+        <path id="Path_765" data-name="Path 765" d="M306.254,333.123h0a6.232,6.232,0,0,1-2.787-8.36l11.043-22.086a6.231,6.231,0,0,1,8.36-2.787h0a6.232,6.232,0,0,1,2.787,8.36l-11.043,22.086A6.231,6.231,0,0,1,306.254,333.123Z" transform="translate(-302.808 -299.231)" fill="#3480fa"/>
+        <path id="Path_766" data-name="Path 766" d="M353.073,333.123h0a6.231,6.231,0,0,1-2.787-8.36l11.043-22.086a6.231,6.231,0,0,1,8.36-2.787h0a6.231,6.231,0,0,1,2.787,8.36l-11.043,22.086A6.231,6.231,0,0,1,353.073,333.123Z" transform="translate(-329.896 -299.231)" fill="#3480fa"/>
+        <circle id="Ellipse_3" data-name="Ellipse 3" cx="8.308" cy="8.308" r="8.308" transform="translate(40.832 17.275)" fill="#3480fa"/>
+      </g>
+    </g>
+  </g>
+</svg>
