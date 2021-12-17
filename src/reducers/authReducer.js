@@ -1,5 +1,6 @@
 import { userConstants } from "../constants";
 
+// if we closed the session or server and opened again then the state will get the data from localstorage if available
 let user = JSON.parse(localStorage.getItem('user'));
 const initialState = user ? { loggedIn: true, user } : {};
 

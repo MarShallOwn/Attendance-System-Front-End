@@ -1,0 +1,87 @@
+.login{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    background-image: linear-gradient(180deg,#FFFFFF, #E9F1FF);
+    z-index: -1000;
+}
+
+.logo{
+    position: absolute;
+    top: 3rem;
+    left: 7rem;
+}
+
+.leftMan{
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-top: 10rem;
+}
+
+.rightMan{
+    flex-grow: 2;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    padding-top: 10rem;
+}
+
+.lamp{
+    top: 0;
+    left: 3rem;
+    position: absolute;
+}
+
+
+
+.loginForm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-grow: 3;
+}
+
+.door{
+    position: absolute;
+    left: 50%;
+    margin-left: -21.9rem;
+}
+
+.form{
+    position: relative;
+    margin-top: 8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 41rem;
+    width: 34rem;
+    z-index: 100;
+}
+
+.title{
+    margin-bottom: 3rem;
+}
+
+.passwordDiv {
+    margin-top: 2rem;
+}
+
+.loginButton {
+    margin-top: 3rem;
+}
+
+.forgotPassword{
+    margin-top: 1.5rem;
+    text-decoration: none;
+}
+
+.okra{
+    position: absolute;
+    top: 14.5rem;
+    left: 3rem;
+}

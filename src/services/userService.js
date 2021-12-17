@@ -1,15 +1,15 @@
 import authAxios from "../customAxios";
 
-const login = (username, password) => {
+const login = (email, password) => {
   return new Promise((resolve, reject) => {
     authAxios
-      .post(`/login`, { username, password })
+      .post("/auth/login", { email, password })
       .then((res) => {
-        if (res.data.statusText === "ok") {
-          localStorage.setItem("user", JSON.stringify(res.data.user));
-          resolve(res.data.user);
+        if (res.status === 200) {
+          localStorage.setItem("user", JSON.stringify(res.data.data));
+          resolve(res.data.data);
         } else {
-          reject(res.data.err);
+          reject(res.data.error);
         }
       })
       .catch((err) => reject(handleUnAuth(err)));

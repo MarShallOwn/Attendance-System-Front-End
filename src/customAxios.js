@@ -11,7 +11,6 @@ axios.interceptors.request.use(config => {
 
 axios.interceptors.response.use(res => {
     if (res.status === 401) {
-
         // auto logout if 401 response returned from api
         userService.logout();
         window.location.reload(true);
