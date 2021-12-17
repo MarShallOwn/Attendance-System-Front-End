@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 import { handleValidation } from "./loginService";
 import { Link } from "react-router-dom";
-import { LargePrimaryButton } from "../styles/globalStyle";
+import { LargePrimaryButton } from "../../styles/globalStyle";
 import { connect } from "react-redux";
-import { userActions } from "../actions/userAction";
-import { Input } from "../styles/globalStyle";
+import { userActions } from "../../actions/userAction";
+import { Input } from "../../styles/globalStyle";
 import styled from "styled-components";
 import classes from "./Login.module.css";
-import sizes from "../styles/sizes";
-import colors from "../styles/colors";
 
 // svg
-import okra from "../images/okra.svg";
-import door from "../images/door.svg";
+import okra from "../../images/okra.svg";
+import door from "../../images/door.svg";
 
 const LoginForm = (props) => {
   const { navigate } = props;
@@ -42,7 +40,7 @@ const LoginForm = (props) => {
         <img className={classes.okra} src={okra} />
         <h2 className={classes.title}>Welcome back to ATMS !</h2>
         <div>
-          <Label>Email or full name</Label>
+          <label className={classes.label} >Email or full name</label>
           <LoginInput
             onChange={(e) => setFields({ ...fields, email: e.target.value })}
           ></LoginInput>
@@ -54,7 +52,7 @@ const LoginForm = (props) => {
         </div>
 
         <div className={classes.passwordDiv}>
-          <Label>Password</Label>
+          <label className={classes.label} >Password</label>
           <LoginInput
             onChange={(e) => setFields({ ...fields, password: e.target.value })}
           ></LoginInput>
@@ -73,7 +71,6 @@ const LoginForm = (props) => {
         </LargePrimaryButton>
         <Link
           className={classes.forgotPassword}
-          style={forgotPasswordStyle}
           to="/forgot-password"
         >
           Forgot password ?
@@ -87,15 +84,6 @@ const LoginForm = (props) => {
 const LoginInput = styled(Input)`
   width: 344px;
   margin-top: 0.5rem;
-`;
-
-const forgotPasswordStyle = {
-  color: colors.GRAY,
-  fontSize: sizes.SMALLER,
-};
-
-const Label = styled.label`
-  color: ${colors.GRAY};
 `;
 
 const mapDispatchToProps = (dispatch) => {

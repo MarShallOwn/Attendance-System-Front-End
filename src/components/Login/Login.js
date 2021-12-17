@@ -1,28 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import classes from "./Login.module.css";
 import LoginForm from "./LoginForm";
-
-
 // svgs
+import logo from "../../images/logo.svg";
+import manLeft from "../../images/man_left.svg";
+import manRight from "../../images/man_right.svg";
 
-import logo from "../images/logo.svg";
-import manLeft from "../images/man_left.svg";
-import manRight from "../images/man_right.svg";
+import lamp from "../../images/lamp.svg";
 
-import lamp from "../images/lamp.svg";
-
-const Login = (props) => {
+const Login = props => {
   const navigate = useNavigate();
-
-
-  useEffect(() => {
-    props.setShowNav(false);
-
-    return () => {
-      props.setShowNav(true);
-    };
-  }, []);
 
   return (
     <div className={classes.login}>
@@ -38,7 +26,5 @@ const Login = (props) => {
     </div>
   );
 };
-
-
 
 export default Login

@@ -1,0 +1,33 @@
+.navbar {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    height: 8vh;
+    padding-bottom: .5rem;
+    box-shadow: 0px 0px 4px #00000029;
+}
+
+.username{
+    margin: 0 1.2rem;
+    padding-left: 1rem;
+    border-left: 1px solid var(--primary-color);
+}
+
+.leftSide{
+    margin-left: 3rem;
+}
+
+.rightSide{
+    display: flex;
+    align-items: center;
+    margin-right: 3rem;
+}
+
+.profileDiv {
+    background-color: var(--secondary-color);
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    border-radius: 100%;
+    padding: .5rem;
+}

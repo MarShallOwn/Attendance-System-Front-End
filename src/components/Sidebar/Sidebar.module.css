@@ -1,0 +1,40 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-image: linear-gradient(var(--white-color), var(--secondary-color));
+}
+
+.logo{
+    height: 28px;
+    padding-left: 3rem;
+    margin-top: 1.7rem;
+    margin-bottom: 4rem;
+}
+
+.tab {
+    display: flex;
+    font-size: var(--h3-size);
+    padding-left: 3rem;
+    padding: 1rem 0rem 1rem 3rem;
+}
+
+.tab:hover{
+    cursor: pointer;
+}
+
+.activeTab{
+    display: flex;
+    font-size: var(--h3-size);
+    background: rgba(52,128,250,0.1);
+    padding-left: 3rem;
+    padding: 1rem 0rem 1rem 3rem;
+}
+
+.activeTab:hover{
+    cursor: pointer;
+}
+
+.title{
+    margin-left: 1.5rem;
+}
