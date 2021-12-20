@@ -25,6 +25,17 @@ const SecondaryButton = styled(Button)`
   }
 `;
 
+const DeleteButton = styled(Button)`
+  border: none;
+  color: var(--inactive-color);
+  background: var(--secondary-color) 0% 0% no-repeat padding-box;
+  :hover {
+    color: var(--white-color);
+    background-color: var(--inactive-color);
+    border: 1px solid var(--inactive-color);
+  }
+`;
+
 export const LargePrimaryButton = styled(PrimaryButton)`
   top: 749px;
   left: 37px;
@@ -65,6 +76,13 @@ export const SmallSecondaryButton = styled(SecondaryButton)`
   width: 125px;
   height: 45px;
   font-size: var(--smaller-size);
+`;
+
+export const MediumDeleteButton = styled(DeleteButton)`
+  top: 749px;
+  left: 413px;
+  width: 180px;
+  height: 55px;
 `;
 
 // Fields

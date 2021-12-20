@@ -13,6 +13,7 @@
 }
 
 .tab {
+    font-weight: var(--light-weight);
     display: flex;
     font-size: var(--h3-size);
     padding-left: 3rem;

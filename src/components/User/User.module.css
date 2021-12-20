@@ -1,0 +1,22 @@
+.statusCell {
+    display: flex;
+    color: var(--active-color) !important;
+}
+
+.activeDot {
+    height: 6px;
+    width: 6px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-bottom: .12rem;
+    background-color: var(--active-color);
+}
+
+.inactiveDot {
+    height: 6px;
+    width: 6px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-bottom: .12rem;
+    background-color: var(--inactive-color);
+}
