@@ -1,4 +1,4 @@
-import classes from "./Department.module.css";
+import classes from "./LeaveRequest.module.css";
 import React, { useEffect, useState } from "react";
 import {
   FormControl,
@@ -18,8 +18,8 @@ import {
 import {
   SmallPrimaryButton,
   InputWithIcon,
-  MediumSecondaryButton,
   MediumDeleteButton,
+  MediumSecondaryButton,
 } from "../../styles/globalStyle";
 import searchIcon from "../../images/search.svg";
 import deleteIcon from "../../images/delete.svg";
@@ -39,14 +39,25 @@ const CustomSelect = styled(Select)`
   border-radius: 10px;
 `;
 
-const DepartmentList = (props) => {
+const LeaveRequestList = (props) => {
+  // state that handles modal close and open
   const [modalOpen, setModalOpen] = useState(false);
   const [listUpdated, setListUpdated] = useState(true);
   const [modalEntity, setModalEntity] = useState({ id: "", name: "" });
-  const [departmentsList, setDepartmentsList] = useState([]);
+  const [leaveRequestsList, setleaveRequestsList] = useState([
+    {
+      id: "dmawoidmoid93mf9q8",
+      employerName: "dajkad",
+      status: "pending",
+      startDate: "admsad",
+      endDate: "djkndjaksd",
+      typeOfLeave: "sick",
+      description: "akdaskdmasmda",
+    },
+  ]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const { slice, range } = useTable(departmentsList, page, rowsPerPage);
+  const { slice, range } = useTable(leaveRequestsList, page, rowsPerPage);
 
   useEffect(() => {
     if (slice.length < 1 && page !== 0) {
@@ -56,11 +67,11 @@ const DepartmentList = (props) => {
 
   useEffect(() => {
     customAxios
-      .get("/department/list")
+      .get("/leave-requests/list/")
       .then((res) => {
         if (res.status === 200) {
           console.log(res.data.data);
-          setDepartmentsList(res.data.data);
+          setleaveRequestsList(res.data.data);
         }
       })
       .catch((err) => {
@@ -78,10 +89,9 @@ const DepartmentList = (props) => {
           );
         }
       });
-  }, []);
+  }, [listUpdated]);
 
   const handleChangePage = (event, newPage) => {
-    console.log(newPage);
     setPage(newPage);
   };
 
@@ -90,47 +100,22 @@ const DepartmentList = (props) => {
     setPage(0);
   };
 
-  // handle the open of the modal to confirm before deleting the item
-  const handleModalDelete = (e) => {
-    const departmentId = e.currentTarget.id;
+  // handle status update
+  const handleStatusChange = (e, leaveRequestID) => {
 
-    const { id, departmentName } = departmentsList.find(
-      (department) => department.id === departmentId
-    );
+    const value = e.target.value
 
-    setModalEntity({ id, name: departmentName });
+    console.log(value)
+    console.log(leaveRequestID)
 
-    setModalOpen(true);
-  };
-
-  // handle the close of the modal
-  const handleModalCancel = () => {
-    setModalOpen(false);
-    setModalEntity({ id: "", name: "" });
-  };
-
-  // handle the delete of the item and close of the modal
-  const handleModalConfirmDelete = () => {
-    deleteEntity(`/department/delete/${modalEntity.id}`)
+    customAxios
+      .get(`/admin/leave-requests/update-status/${leaveRequestID}/${value}`)
       .then((res) => {
-        setModalOpen(false);
         if (res.status === 204) {
-          props.flashMessageHandler(
-            "open",
-            flashTypesConstants.SUCCESS,
-            "Department Deleted"
-          );
-          setListUpdated(!listUpdated);
-        } else {
-          props.flashMessageHandler(
-            "open",
-            flashTypesConstants.ERROR,
-            "Something Went Wrong"
-          );
+          setListUpdated(!listUpdated)
         }
       })
       .catch((err) => {
-        setModalOpen(false);
         if (err.response.status == 403) {
           props.flashMessageHandler(
             "open",
@@ -146,30 +131,10 @@ const DepartmentList = (props) => {
         }
       });
 
-    setModalOpen(false);
-  };
+  }
 
   return (
     <div className="list-div">
-      <Modal open={modalOpen}>
-        <div className="modal-style">
-          <div className="modal-container">
-            <h1 className="modal-title">Delete {modalEntity.name}</h1>
-            <p className="modal-body">
-              Warning: Are you sure you want to delete this department ? if you
-              delete this department , data will be deleted
-            </p>
-            <div className="modal-buttons">
-              <MediumSecondaryButton onClick={handleModalCancel}>
-                Cancel
-              </MediumSecondaryButton>
-              <MediumDeleteButton onClick={handleModalConfirmDelete}>
-                Delete
-              </MediumDeleteButton>
-            </div>
-          </div>
-        </div>
-      </Modal>
       <div className="filter"></div>
       <div className="table-div">
         <div className="top-table">
@@ -191,7 +156,7 @@ const DepartmentList = (props) => {
             <InputWithIcon
               icon={searchIcon}
               width="494px"
-              placeholder="Search for user"
+              placeholder="Search for by date range"
             />
           </div>
         </div>
@@ -200,42 +165,49 @@ const DepartmentList = (props) => {
             <Table className="table-style" aria-label="simple table">
               <TableHead className="table-head-style">
                 <TableRow>
-                  <TableCell>Department</TableCell>
-                  <TableCell align="left">Department Head</TableCell>
-                  <TableCell align="left">Department Description</TableCell>
-                  <TableCell align="center">Action</TableCell>
+                  <TableCell>User</TableCell>
+                  <TableCell align="left">Status</TableCell>
+                  <TableCell align="left">Start Date</TableCell>
+                  <TableCell align="left">End Date</TableCell>
+                  <TableCell align="left">Type of leave</TableCell>
+                  <TableCell align="left">Description</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {slice.map((department, index) => (
+                {slice.map((leaveRequest, index) => (
                   <TableRow className="tr-style" key={index}>
-                    <TableCell align="left">{department.departmentName}</TableCell>
-                    <TableCell align="left">{department.departmentHeadName}</TableCell>
-                    <TableCell align="left">{department.departmentDesc}</TableCell>
-                    <TableCell align="center">
-                      <div className="action-style">
-                        <Link to="/user/view" state={{ departmentId: department.id }}>
-                          <img src={viewIcon} />
-                        </Link>
-                        <Link to="/user/edit" state={{ departmentId: department.id }}>
-                          <img src={editIcon} />
-                        </Link>
-                        <img
-                          id={department.id}
-                          onClick={handleModalDelete}
-                          src={deleteIcon}
-                        />
-                      </div>
+                    <TableCell>{leaveRequest.employerName}</TableCell>
+                    <TableCell align="left">
+                        <Select
+                        className={classes[`${leaveRequest.status}Status`]}
+                          size="small"
+                          value={leaveRequest.status}
+                          onChange={(e) => handleStatusChange(e, leaveRequest.id)}
+                        >
+                          <MenuItem value={"granted"}>Granted</MenuItem>
+                          <MenuItem value={"rejected"}>Rejected</MenuItem>
+                          <MenuItem value={"pending"}>Pending</MenuItem>
+                        </Select>
+                    </TableCell>
+                    <TableCell align="left">{leaveRequest.startDate}</TableCell>
+                    <TableCell align="left">{leaveRequest.endDate}</TableCell>
+                    <TableCell align="left">
+                      {leaveRequest.typeOfLeave}
+                    </TableCell>
+                    <TableCell align="left">
+                      {leaveRequest.description}
                     </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
               <TableHead className="table-head-style">
                 <TableRow>
-                <TableCell>Department</TableCell>
-                  <TableCell align="left">Department Head</TableCell>
-                  <TableCell align="left">Department Description</TableCell>
-                  <TableCell align="center">Action</TableCell>
+                  <TableCell>User</TableCell>
+                  <TableCell align="left">Status</TableCell>
+                  <TableCell align="left">Start Date</TableCell>
+                  <TableCell align="left">End Date</TableCell>
+                  <TableCell align="left">Type of leave</TableCell>
+                  <TableCell align="left">Description</TableCell>
                 </TableRow>
               </TableHead>
             </Table>
@@ -246,7 +218,7 @@ const DepartmentList = (props) => {
         component="div"
         style={{ marginRight: "1rem", marginTop: "2rem" }}
         rowsPerPageOptions={[2, 4, 5, 10, 15, 20, 25, 30]}
-        count={departmentsList.length}
+        count={leaveRequestsList.length}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}
@@ -264,4 +236,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(DepartmentList);
+export default connect(null, mapDispatchToProps)(LeaveRequestList);

@@ -1,0 +1,17 @@
+.pendingStatus{
+    color: var(--gray-color) !important;
+    border: 1px solid var(--gray-color) !important;
+    border-radius: 7px !important;
+}
+
+.grantedStatus{
+    color: var(--active-color) !important;
+    border: 1px solid var(--active-color) !important;
+    border-radius: 7px !important;
+}
+
+.rejectedStatus{
+    color: var(--inactive-color) !important;
+    border: 1px solid var(--inactive-color) !important;
+    border-radius: 7px !important;
+}
