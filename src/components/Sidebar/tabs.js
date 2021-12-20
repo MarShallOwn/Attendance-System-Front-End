@@ -21,7 +21,7 @@ const tabs = [
     createTab(user, "User", "/user/list"),
     createTab(department, "Department", "/department/list"),
     createTab(holiday, "Holidays", "/holiday/list"),
-    createTab(request, "Request", "/request"),
+    createTab(request, "Leave Request", "/leave-request/list"),
     createTab(schedule, "Schedule", "/schedule"),
     createTab(report, "Report", "/report"),
     createTab(settings, "Settings", "/settings"),

@@ -20,6 +20,8 @@ import Holiday from "./components/Holiday/Holiday";
 import EditHoliday from "./components/Holiday/EditHoliday";
 import ViewHoliday from "./components/Holiday/ViewHoliday";
 import HolidayList from "./components/Holiday/HolidayList";
+import LeaveRequest from "./components/LeaveRequest/LeaveRequestList";
+import LeaveRequestList from "./components/LeaveRequest/LeaveRequestList";
 
 const App = (props) => {
   return (
@@ -107,7 +109,6 @@ const App = (props) => {
               </PrivateRoute>
             }
           />
-
           <Route
             path="/holiday/list"
             element={
@@ -146,6 +147,17 @@ const App = (props) => {
               <PrivateRoute>
                 <SystemWrapper>
                   <Holiday component={ViewHoliday} />
+                </SystemWrapper>
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/leave-request/list"
+            element={
+              <PrivateRoute>
+                <SystemWrapper>
+                  <LeaveRequest component={LeaveRequestList} />
                 </SystemWrapper>
               </PrivateRoute>
             }
