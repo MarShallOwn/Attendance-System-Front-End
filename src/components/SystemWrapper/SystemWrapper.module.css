@@ -14,4 +14,5 @@
 .content{
     background-color: var(--content-background-color);
     height: 91vh;
+    padding: 2rem 5rem;
 }

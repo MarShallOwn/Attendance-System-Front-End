@@ -1,14 +1,12 @@
-import axios from 'axios'
 import authAxios from './customAxios'
 import React, { useEffect } from 'react'
-import { userService } from './services/userService'
 import { connect } from 'react-redux'
 const Home = props => {
 
     useEffect(() => {
         console.log(localStorage.getItem("user"))
         console.log(props)
-    },[])
+    }, [])
 
     const authorizeCheck = () => {
         authAxios.post("/welcome")

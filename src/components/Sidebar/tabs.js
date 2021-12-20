@@ -8,52 +8,24 @@ import report from "../../images/report.svg"
 import settings from "../../images/settings.svg"
 import logout from "../../images/logout.svg"
 
+const createTab = (icon, title, route) => {
+    return {
+        icon,
+        title,
+        route
+    }
+}
+
 const tabs = [
-    {
-        icon: home,
-        title: "Dashboard",
-        route: "/dashboard",
-    },
-    {
-        icon: user,
-        title: "User",
-        route: "/user",
-    },
-    {
-        icon: department,
-        title: "Department",
-        route: "/department",
-    },
-    {
-        icon: holiday,
-        title: "Holidays",
-        route: "/holidays",
-    },
-    {
-        icon: request,
-        title: "Request",
-        route: "/request",
-    },
-    {
-        icon: schedule,
-        title: "Schedule",
-        route: "/schedule",
-    },
-    {
-        icon: report,
-        title: "Report",
-        route: "/report",
-    },
-    {
-        icon: settings,
-        title: "Settings",
-        route: "/settings",
-    },
-    {
-        icon: logout,
-        title: "Logout",
-        route: "/logout",
-    },
+    createTab(home, "Dashboard", "/dashboard"),
+    createTab(user, "User", "/user"),
+    createTab(department, "Department", "/department"),
+    createTab(holiday, "Holidays", "/holidays"),
+    createTab(request, "Request", "/request"),
+    createTab(schedule, "Schedule", "/schedule"),
+    createTab(report, "Report", "/report"),
+    createTab(settings, "Settings", "/settings"),
+    createTab(logout, "Logout", "/logout"),
 ]
 
 

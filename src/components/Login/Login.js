@@ -18,7 +18,7 @@ const Login = props => {
       <div className={classes.leftMan}>
         <img src={manLeft} />
       </div>
-      <LoginForm login={props.login} navigate={navigate} />
+      <LoginForm navigate={navigate} />
       <div className={classes.rightMan}>
         <img className={classes.lamp} src={lamp} />
         <img src={manRight} />
