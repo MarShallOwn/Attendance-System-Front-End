@@ -15,9 +15,13 @@ import { connect } from "react-redux";
 import { flashActions } from "./actions/flashMessageAction";
 import DepartmentList from "./components/Department/DepartmentList";
 import Department from "./components/Department/Department";
+import CreateHoliday from "./components/Holiday/CreateHoliday";
+import Holiday from "./components/Holiday/Holiday";
+import EditHoliday from "./components/Holiday/EditHoliday";
+import ViewHoliday from "./components/Holiday/ViewHoliday";
+import HolidayList from "./components/Holiday/HolidayList";
 
-const App = props => {
-
+const App = (props) => {
   return (
     <div>
       <Snackbar
@@ -93,12 +97,55 @@ const App = props => {
               </PrivateRoute>
             }
           />
-                    <Route
+          <Route
             path="/department/list"
             element={
               <PrivateRoute>
                 <SystemWrapper>
                   <Department component={DepartmentList} />
+                </SystemWrapper>
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/holiday/list"
+            element={
+              <PrivateRoute>
+                <SystemWrapper>
+                  <Holiday component={HolidayList} />
+                </SystemWrapper>
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/holiday/create"
+            element={
+              <PrivateRoute>
+                <SystemWrapper>
+                  <Holiday component={CreateHoliday} />
+                </SystemWrapper>
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/holiday/edit"
+            element={
+              <PrivateRoute>
+                <SystemWrapper>
+                  <Holiday component={EditHoliday} />
+                </SystemWrapper>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/holiday/view"
+            element={
+              <PrivateRoute>
+                <SystemWrapper>
+                  <Holiday component={ViewHoliday} />
                 </SystemWrapper>
               </PrivateRoute>
             }
@@ -110,18 +157,17 @@ const App = props => {
 };
 
 const mapStateToProps = (state) => {
-  return{
-    flashBox: state.flashMessageReducer
-}
+  return {
+    flashBox: state.flashMessageReducer,
+  };
 };
 
-const mapDispatchToProps = dispatch => {
-
-  return{
+const mapDispatchToProps = (dispatch) => {
+  return {
     flashMessageHandler: (handlerType) => {
-      dispatch(flashActions.flashMessage(handlerType))
-    }
-  }
-}
+      dispatch(flashActions.flashMessage(handlerType));
+    },
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

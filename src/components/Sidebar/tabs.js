@@ -18,9 +18,9 @@ const createTab = (icon, title, route) => {
 
 const tabs = [
     createTab(home, "Dashboard", "/dashboard"),
-    createTab(user, "User", "/user"),
-    createTab(department, "Department", "/department"),
-    createTab(holiday, "Holidays", "/holidays"),
+    createTab(user, "User", "/user/list"),
+    createTab(department, "Department", "/department/list"),
+    createTab(holiday, "Holidays", "/holiday/list"),
     createTab(request, "Request", "/request"),
     createTab(schedule, "Schedule", "/schedule"),
     createTab(report, "Report", "/report"),
