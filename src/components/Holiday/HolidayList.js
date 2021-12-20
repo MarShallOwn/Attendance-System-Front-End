@@ -1,4 +1,4 @@
-import classes from "./User.module.css";
+import classes from "./Holiday.module.css";
 import React, { useEffect, useState } from "react";
 import {
   FormControl,
@@ -13,9 +13,14 @@ import {
   TableCell,
   Table,
   TablePagination,
-  Modal
+  Modal,
 } from "@mui/material";
-import { SmallPrimaryButton, InputWithIcon, MediumDeleteButton, MediumSecondaryButton } from "../../styles/globalStyle";
+import {
+  SmallPrimaryButton,
+  InputWithIcon,
+  MediumDeleteButton,
+  MediumSecondaryButton,
+} from "../../styles/globalStyle";
 import searchIcon from "../../images/search.svg";
 import deleteIcon from "../../images/delete.svg";
 import editIcon from "../../images/edit.svg";
@@ -39,10 +44,10 @@ const UsersList = (props) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [listUpdated, setListUpdated] = useState(true);
   const [modalEntity, setModalEntity] = useState({ id: "", name: "" });
-  const [usersList, setUsersList] = useState([]);
+  const [holidaysList, setHolidaysList] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const { slice, range } = useTable(usersList, page, rowsPerPage);
+  const { slice, range } = useTable(holidaysList, page, rowsPerPage);
 
   useEffect(() => {
     if (slice.length < 1 && page !== 0) {
@@ -52,11 +57,11 @@ const UsersList = (props) => {
 
   useEffect(() => {
     customAxios
-      .get("/auth/employer/list/")
+      .get("/holiday/list/")
       .then((res) => {
         if (res.status === 200) {
           console.log(res.data.data);
-          setUsersList(res.data.data);
+          setHolidaysList(res.data.data);
         }
       })
       .catch((err) => {
@@ -88,14 +93,11 @@ const UsersList = (props) => {
 
   // handle the open of the modal to confirm before deleting the item
   const handleModalDelete = (e) => {
+    const holidayId = e.currentTarget.id;
 
-    const userId = e.currentTarget.id
+    const { id, name } = holidaysList.find((holiday) => holiday.id === holidayId);
 
-    const { id, firstname, lastname } = usersList.find(
-      (user) => user.id === userId
-    );
-
-    setModalEntity({ id, name: `${firstname} ${lastname}` });
+    setModalEntity({ id, name });
 
     setModalOpen(true);
   };
@@ -103,21 +105,21 @@ const UsersList = (props) => {
   // handle the close of the modal
   const handleModalCancel = () => {
     setModalOpen(false);
-    setModalEntity({id: "", name: ""})
+    setModalEntity({ id: "", name: "" });
   };
 
   // handle the delete of the item and close of the modal
   const handleModalConfirmDelete = () => {
-    deleteEntity(`/auth/employer/delete/${modalEntity.id}`)
+    deleteEntity(`/holiday/delete/${modalEntity.id}`)
       .then((res) => {
         setModalOpen(false);
         if (res.status === 204) {
           props.flashMessageHandler(
             "open",
             flashTypesConstants.SUCCESS,
-            "User Deleted"
+            "Holiday Deleted"
           );
-          setListUpdated(!listUpdated)
+          setListUpdated(!listUpdated);
         } else {
           props.flashMessageHandler(
             "open",
@@ -153,8 +155,8 @@ const UsersList = (props) => {
           <div className="modal-container">
             <h1 className="modal-title">Delete {modalEntity.name}</h1>
             <p className="modal-body">
-              Warning: Are you sure you want to delete this user ? if you delete
-              this user , data will be deleted
+              Warning: Are you sure you want to delete this holiday ? if you delete
+              this holiday , data will be deleted
             </p>
             <div className="modal-buttons">
               <MediumSecondaryButton onClick={handleModalCancel}>
@@ -188,7 +190,7 @@ const UsersList = (props) => {
             <InputWithIcon
               icon={searchIcon}
               width="494px"
-              placeholder="Search for user"
+              placeholder="Search for holiday"
             />
           </div>
         </div>
@@ -197,36 +199,38 @@ const UsersList = (props) => {
             <Table className="table-style" aria-label="simple table">
               <TableHead className="table-head-style">
                 <TableRow>
-                  <TableCell>User</TableCell>
-                  <TableCell align="left">Phone</TableCell>
-                  <TableCell align="left">Department</TableCell>
-                  <TableCell align="left">Status</TableCell>
-                  <TableCell align="left">Join Date</TableCell>
+                  <TableCell align="left">Holiday name</TableCell>
+                  <TableCell align="left">Holiday type</TableCell>
+                  <TableCell align="left">Start date</TableCell>
+                  <TableCell align="left">End Date</TableCell>
+                  <TableCell align="left">No of days</TableCell>
                   <TableCell align="center">Action</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {slice.map((user, index) => (
+                {slice.map((holiday, index) => (
                   <TableRow className="tr-style" key={index}>
-                    <TableCell>
-                      {`${user.firstname} ${user.lastname}`}
-                    </TableCell>
-                    <TableCell align="left">{user.phoneNumber}</TableCell>
-                    <TableCell align="left">N/A</TableCell>
-                    <TableCell className={classes.statusCell} align="left">
-                      Active <div className={classes.activeDot}></div>
-                    </TableCell>
-                    <TableCell align="left">N/A</TableCell>
+                    <TableCell>{holiday.name}</TableCell>
+                    <TableCell align="left">{holiday.type}</TableCell>
+                    <TableCell align="left">{holiday.startDate}</TableCell>
+                    <TableCell align="left">{holiday.endDate}</TableCell>
+                    <TableCell align="left">{holiday.noOfDays}</TableCell>
                     <TableCell align="center">
                       <div className="action-style">
-                        <Link to="/user/view" state={{ userId: user.id }}>
+                        <Link
+                          to="/holiday/view"
+                          state={{ holidayId: holiday.id }}
+                        >
                           <img src={viewIcon} />
                         </Link>
-                        <Link to="/user/edit" state={{ userId: user.id }}>
+                        <Link
+                          to="/holiday/edit"
+                          state={{ holidayId: holiday.id }}
+                        >
                           <img src={editIcon} />
                         </Link>
                         <img
-                        id={user.id}
+                          id={holiday.id}
                           onClick={handleModalDelete}
                           src={deleteIcon}
                         />
@@ -237,11 +241,11 @@ const UsersList = (props) => {
               </TableBody>
               <TableHead className="table-head-style">
                 <TableRow>
-                  <TableCell>User</TableCell>
-                  <TableCell align="left">Phone</TableCell>
-                  <TableCell align="left">Department</TableCell>
-                  <TableCell align="left">Status</TableCell>
-                  <TableCell align="left">Join Date</TableCell>
+                  <TableCell align="left">Holiday name</TableCell>
+                  <TableCell align="left">Holiday type</TableCell>
+                  <TableCell align="left">Start date</TableCell>
+                  <TableCell align="left">End Date</TableCell>
+                  <TableCell align="left">No of days</TableCell>
                   <TableCell align="center">Action</TableCell>
                 </TableRow>
               </TableHead>
@@ -253,7 +257,7 @@ const UsersList = (props) => {
         component="div"
         style={{ marginRight: "1rem", marginTop: "2rem" }}
         rowsPerPageOptions={[2, 4, 5, 10, 15, 20, 25, 30]}
-        count={usersList.length}
+        count={holidaysList.length}
         page={page}
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}
