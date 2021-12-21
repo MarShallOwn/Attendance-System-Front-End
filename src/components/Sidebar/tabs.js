@@ -23,7 +23,7 @@ const tabs = [
     createTab(holiday, "Holidays", "/holiday/list"),
     createTab(request, "Leave Request", "/leave-request/list"),
     createTab(schedule, "Schedule", "/schedule"),
-    createTab(report, "Report", "/report"),
+    createTab(report, "Report", "/report/users-report"),
     createTab(settings, "Settings", "/settings"),
     createTab(logout, "Logout", "/logout"),
 ]

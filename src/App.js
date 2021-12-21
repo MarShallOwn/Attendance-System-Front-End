@@ -22,6 +22,9 @@ import ViewHoliday from "./components/Holiday/ViewHoliday";
 import HolidayList from "./components/Holiday/HolidayList";
 import LeaveRequest from "./components/LeaveRequest/LeaveRequestList";
 import LeaveRequestList from "./components/LeaveRequest/LeaveRequestList";
+import Report from "./components/Report/Report";
+import MultipleUsersReport from "./components/Report/MultipleUsersReport";
+import SingleUserReport from "./components/Report/SingleUserReport";
 
 const App = (props) => {
   return (
@@ -158,6 +161,28 @@ const App = (props) => {
               <PrivateRoute>
                 <SystemWrapper>
                   <LeaveRequest component={LeaveRequestList} />
+                </SystemWrapper>
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/report/users-report"
+            element={
+              <PrivateRoute>
+                <SystemWrapper>
+                  <Report component={MultipleUsersReport} />
+                </SystemWrapper>
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/report/user-report"
+            element={
+              <PrivateRoute>
+                <SystemWrapper>
+                  <Report component={SingleUserReport} />
                 </SystemWrapper>
               </PrivateRoute>
             }

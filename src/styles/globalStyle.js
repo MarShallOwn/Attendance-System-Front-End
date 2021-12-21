@@ -116,6 +116,7 @@ export const SearchInput = styled.input`
   left: 287px;
   height: 45px;
   border: none;
+  font-weight: var(--medium-weight);
   background: var(--search-background-color) 0% 0% no-repeat padding-box;
   border-radius: 10px;
   opacity: 1;

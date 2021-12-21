@@ -1,0 +1,35 @@
+.topTable{
+    display: flex;
+    justify-content: flex-end;
+    padding: 2rem 2.5rem;
+}
+
+.leftTopTable {
+    margin-right: 3rem;
+}
+
+.selectStyle{
+    margin-top: -0.2rem !important;
+    font-weight: var(--bold-weight) !important;
+    font-size: var(--smaller-size) !important;
+}
+
+.selectStatus {
+    margin-left: 1rem !important;
+}
+
+.attendColor {
+    color: var(--active-color)
+}
+
+.absentColor {
+    color: var(--inactive-color)
+}
+
+.weekendColor {
+    color: var(--gray-color)
+}
+
+.holidayColor {
+    color: var(--gray-color)
+}

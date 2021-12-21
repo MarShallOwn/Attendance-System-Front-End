@@ -7,18 +7,22 @@ const routes = [
   {
     pathname: "/user/list",
     pageName: "User List",
+    showAdd: true,
   },
   {
     pathname: "/user/create",
     pageName: "Create User",
+    showAdd: false,
   },
   {
     pathname: "/user/edit",
     pageName: "Edit User",
+    showAdd: false,
   },
   {
     pathname: "/user/view",
     pageName: "View User",
+    showAdd: false,
   },
 ];
 
@@ -34,7 +38,7 @@ const User = ({ component: Component }) => {
 
   return (
     <div>
-      <HeaderBar categoryName="User" pageName={activeRoute.pageName} />
+      <HeaderBar categoryName="User" mainRoute="user" pageName={activeRoute.pageName} showAdd={activeRoute.showAdd} />
       <Component />
     </div>
   );
