@@ -7,6 +7,7 @@ const routes = [
   {
     pathname: "/leave-request/list",
     pageName: "Leave Request List",
+    showAdd: false,
   }
 ];
 
@@ -22,7 +23,7 @@ const LeaveRequest = ({ component: Component }) => {
 
   return (
     <div>
-      <HeaderBar categoryName="Leave Request" pageName={activeRoute.pageName} />
+      <HeaderBar CategoryName="Leave Request" mainRoute="leave-request" pageName={activeRoute.pageName} onePage={true} />
       <Component />
     </div>
   );

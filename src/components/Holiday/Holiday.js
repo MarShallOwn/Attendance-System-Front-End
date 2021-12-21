@@ -7,18 +7,22 @@ const routes = [
   {
     pathname: "/holiday/list",
     pageName: "Holiday List",
+    showAdd: true,
   },
   {
     pathname: "/holiday/create",
     pageName: "Create Holiday",
+    showAdd: false,
   },
   {
     pathname: "/holiday/edit",
     pageName: "Edit Holiday",
+    showAdd: false,
   },
   {
     pathname: "/holiday/view",
     pageName: "View Holiday",
+    showAdd: false,
   },
 ];
 
@@ -34,7 +38,7 @@ const Holiday = ({ component: Component }) => {
 
   return (
     <div>
-      <HeaderBar categoryName="Holiday" pageName={activeRoute.pageName} />
+      <HeaderBar categoryName="Holiday" mainRoute="holiday" pageName={activeRoute.pageName} />
       <Component />
     </div>
   );

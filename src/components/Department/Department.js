@@ -6,7 +6,8 @@ import { useLocation } from "react-router-dom";
 const routes = [
   {
     pathname: "/department/list",
-    pageName: "Department List",
+    pageName: "Department",
+    showAdd: true
   }
 ];
 
@@ -22,7 +23,7 @@ const Department = ({ component: Component }) => {
 
   return (
     <div>
-      <HeaderBar categoryName="Department" pageName={activeRoute.pageName} />
+      <HeaderBar categoryName="Department" mainRoute="department" pageName={activeRoute.pageName} onePage={true} showAdd={activeRoute.showAdd} />
       <Component />
     </div>
   );

@@ -191,7 +191,7 @@ const DepartmentList = (props) => {
             <InputWithIcon
               icon={searchIcon}
               width="494px"
-              placeholder="Search for user"
+              placeholder="Search for department"
             />
           </div>
         </div>
