@@ -40,7 +40,7 @@ const LoginForm = (props) => {
         <img className={classes.okra} src={okra} />
         <h2 className={classes.title}>Welcome back to ATMS !</h2>
         <div>
-          <label className={classes.label} >Email or full name</label>
+          <label className={classes.label}>Email or full name</label>
           <LoginInput
             onChange={(e) => setFields({ ...fields, email: e.target.value })}
           ></LoginInput>
@@ -52,8 +52,9 @@ const LoginForm = (props) => {
         </div>
 
         <div className={classes.passwordDiv}>
-          <label className={classes.label} >Password</label>
+          <label className={classes.label}>Password</label>
           <LoginInput
+            type="password"
             onChange={(e) => setFields({ ...fields, password: e.target.value })}
           ></LoginInput>
           {errors.password.map((error, index) => (
@@ -69,10 +70,7 @@ const LoginForm = (props) => {
         >
           Log in
         </LargePrimaryButton>
-        <Link
-          className={classes.forgotPassword}
-          to="/forgot-password"
-        >
+        <Link className={classes.forgotPassword} to="/forgot-password">
           Forgot password ?
         </Link>
       </div>

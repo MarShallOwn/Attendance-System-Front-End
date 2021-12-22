@@ -13,14 +13,22 @@ import {
   TableCell,
   Table,
   TablePagination,
+  TextField,
 } from "@mui/material";
-import { SmallPrimaryButton, InputWithIcon, SearchInput } from "../../styles/globalStyle";
+import {
+  SmallPrimaryButton,
+  InputWithIcon,
+  SearchInput,
+} from "../../styles/globalStyle";
 import searchIcon from "../../images/search.svg";
 import customAxios from "../../customAxios";
 import { connect } from "react-redux";
 import { flashActions } from "../../actions/flashMessageAction";
 import { flashTypesConstants } from "../../constants";
 import useTable from "../../resuable-comp/useTable";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 
 const CustomSelect = styled(Select)`
   height: 45px;
@@ -29,12 +37,13 @@ const CustomSelect = styled(Select)`
 `;
 
 const MultipleUsersReport = (props) => {
-  const { setActiveUser } = props
+  const { setActiveUser } = props;
   const [listUpdated, setListUpdated] = useState(true);
   const [reportsList, setReportsList] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const { slice, range } = useTable(reportsList, page, rowsPerPage);
+  const [reportDate, setReportDate] = useState(new Date());
 
   useEffect(() => {
     if (slice.length < 1 && page !== 0) {
@@ -77,6 +86,10 @@ const MultipleUsersReport = (props) => {
     setPage(0);
   };
 
+  const handleReportDate = (newValue) => {
+    setReportDate(newValue)
+  }
+
   return (
     <div className="list-div">
       <div className="filter"></div>
@@ -84,28 +97,39 @@ const MultipleUsersReport = (props) => {
         <div className={classes.topTable}>
           <div className={classes.leftTopTable}>
             <FormControl>
-              <InputLabel className={classes.selectStyle}>
-                User
-              </InputLabel>
+              <InputLabel className={classes.selectStyle}>User</InputLabel>
               <CustomSelect value={""}>
                 <MenuItem value={"delete"}>Delete</MenuItem>
               </CustomSelect>
             </FormControl>
 
             <FormControl className={classes.selectStatus}>
-              <InputLabel className={classes.selectStyle}>
-                Status
-              </InputLabel>
+              <InputLabel className={classes.selectStyle}>Status</InputLabel>
               <CustomSelect value={""}>
                 <MenuItem value={"delete"}>Delete</MenuItem>
               </CustomSelect>
             </FormControl>
           </div>
           <div className="right-top-table">
-            <SearchInput
-              style={{width: "339px", paddingLeft: "20px"}}
-              placeholder="Search for by date range"
-            />
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DesktopDatePicker
+                inputFormat="MM/dd/yyyy"
+                value={reportDate}
+                required
+                InputProps={{
+                  disableUnderline: true
+                }}
+                onChange={handleReportDate}
+                renderInput={(params) => (
+                  <TextField
+                    className={classes.searchInput}
+                    size="medium"
+                    variant="standard"
+                    {...params}
+                  />
+                )}
+              />
+            </LocalizationProvider>
           </div>
         </div>
         <div className="list-table">
@@ -127,7 +151,12 @@ const MultipleUsersReport = (props) => {
                     <TableCell align="left">{report.checkin}</TableCell>
                     <TableCell align="left">{report.checkout}</TableCell>
                     <TableCell align="left">{report.worked}</TableCell>
-                    <TableCell align="left" className={classes[`${report.status}Color`]}>{report.status}</TableCell>
+                    <TableCell
+                      align="left"
+                      className={classes[`${report.status}Color`]}
+                    >
+                      {report.status}
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>

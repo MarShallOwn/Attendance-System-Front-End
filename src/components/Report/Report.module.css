@@ -33,3 +33,19 @@
 .holidayColor {
     color: var(--gray-color)
 }
+
+.searchInput {
+    height: 45px !important;
+    border: none !important;
+    width: 339px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    display: flex !important;
+    justify-content: center !important;
+    outline: none !important;
+    font-weight: var(--medium-weight) !important;
+    background: var(--search-background-color) 0% 0% no-repeat padding-box !important;
+    border-radius: 10px !important;
+    opacity: 1 !important;
+    font-size: var(--body-size) !important;
+}
