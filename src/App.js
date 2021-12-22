@@ -187,6 +187,17 @@ const App = (props) => {
               </PrivateRoute>
             }
           />
+
+          <Route
+            path="/settings"
+            element={
+              <PrivateRoute>
+                <SystemWrapper>
+                  <Report component={SingleUserReport} />
+                </SystemWrapper>
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </div>
     </div>

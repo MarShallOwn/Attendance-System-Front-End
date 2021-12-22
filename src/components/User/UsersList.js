@@ -54,12 +54,15 @@ const UsersList = (props) => {
     customAxios
       .get("/auth/employer/list/")
       .then((res) => {
+        console.log(res.status)
+        console.log(res.data)
         if (res.status === 200) {
           console.log(res.data.data);
           setUsersList(res.data.data);
         }
       })
       .catch((err) => {
+        console.log(err.response.status)
         if (err.response.status == 403) {
           props.flashMessageHandler(
             "open",

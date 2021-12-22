@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 
 const PrivateRoute = ({ children, user }) => {
 
-    const location = useLocation()
+    const location = useLocation();
 
     return(
         <>

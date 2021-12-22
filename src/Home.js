@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 const Home = props => {
 
     useEffect(() => {
-        console.log(localStorage.getItem("user"))
-        console.log(props)
+        console.log( JSON.parse(localStorage.getItem("user")))
+        console.log(props.user)
     }, [])
 
     const authorizeCheck = () => {
