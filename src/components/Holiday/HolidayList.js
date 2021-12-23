@@ -57,7 +57,7 @@ const UsersList = (props) => {
 
   useEffect(() => {
     customAxios
-      .get("/holiday/list/")
+      .get("/holiday/list")
       .then((res) => {
         if (res.status === 200) {
           console.log(res.data.data);
@@ -65,19 +65,11 @@ const UsersList = (props) => {
         }
       })
       .catch((err) => {
-        if (err.response.status == 403) {
-          props.flashMessageHandler(
-            "open",
-            flashTypesConstants.ERROR,
-            "You don't have Authorization to show that"
-          );
-        } else {
           props.flashMessageHandler(
             "open",
             flashTypesConstants.ERROR,
             "Something went wrong"
           );
-        }
       });
   }, [listUpdated]);
 
@@ -130,19 +122,11 @@ const UsersList = (props) => {
       })
       .catch((err) => {
         setModalOpen(false);
-        if (err.response.status == 403) {
-          props.flashMessageHandler(
-            "open",
-            flashTypesConstants.ERROR,
-            "You don't have Authorization to show that"
-          );
-        } else {
           props.flashMessageHandler(
             "open",
             flashTypesConstants.ERROR,
             "Something went wrong"
           );
-        }
       });
 
     setModalOpen(false);

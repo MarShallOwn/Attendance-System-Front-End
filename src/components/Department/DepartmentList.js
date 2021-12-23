@@ -14,6 +14,7 @@ import {
   Table,
   TablePagination,
   Modal,
+  TextField,
 } from "@mui/material";
 import {
   SmallPrimaryButton,
@@ -22,9 +23,7 @@ import {
   MediumDeleteButton,
 } from "../../styles/globalStyle";
 import searchIcon from "../../images/search.svg";
-import deleteIcon from "../../images/delete.svg";
-import editIcon from "../../images/edit.svg";
-import viewIcon from "../../images/view.svg";
+
 import customAxios from "../../customAxios";
 import { connect } from "react-redux";
 import { flashActions } from "../../actions/flashMessageAction";
@@ -32,6 +31,9 @@ import { flashTypesConstants } from "../../constants";
 import useTable from "../../resuable-comp/useTable";
 import { Link } from "react-router-dom";
 import { deleteEntity } from "../../services/appServices";
+import CreateDepartment from "./CreateDepartment";
+import EditDepartment from "./EditDepartment";
+import ViewDepartment from "./ViewDepartment";
 
 const CustomSelect = styled(Select)`
   height: 45px;
@@ -44,9 +46,14 @@ const DepartmentList = (props) => {
   const [listUpdated, setListUpdated] = useState(true);
   const [modalEntity, setModalEntity] = useState({ id: "", name: "" });
   const [departmentsList, setDepartmentsList] = useState([]);
+  const [usersList, setUsersList] = useState([]);
+  // the state that handles the edit that should open
+  const [activeEditID, setActiveEditID] = useState(null);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const { slice, range } = useTable(departmentsList, page, rowsPerPage);
+  // the state that handles the open of the add section
+  const { openAddSection, setOpenAddSection } = props;
 
   useEffect(() => {
     if (slice.length < 1 && page !== 0) {
@@ -61,24 +68,32 @@ const DepartmentList = (props) => {
         if (res.status === 200) {
           console.log(res.data.data);
           setDepartmentsList(res.data.data);
+
+          customAxios
+            .get("/auth/employer/list/")
+            .then((res) => {
+              if (res.status === 200) {
+                console.log(res.data.data);
+                setUsersList(res.data.data);
+              }
+            })
+            .catch((err) => {
+              props.flashMessageHandler(
+                "open",
+                flashTypesConstants.ERROR,
+                "Something went wrong"
+              );
+            });
         }
       })
       .catch((err) => {
-        if (err.response.status == 403) {
-          props.flashMessageHandler(
-            "open",
-            flashTypesConstants.ERROR,
-            "You don't have Authorization to show that"
-          );
-        } else {
-          props.flashMessageHandler(
-            "open",
-            flashTypesConstants.ERROR,
-            "Something went wrong"
-          );
-        }
+        props.flashMessageHandler(
+          "open",
+          flashTypesConstants.ERROR,
+          "Something went wrong"
+        );
       });
-  }, []);
+  }, [listUpdated]);
 
   const handleChangePage = (event, newPage) => {
     console.log(newPage);
@@ -131,26 +146,26 @@ const DepartmentList = (props) => {
       })
       .catch((err) => {
         setModalOpen(false);
-        if (err.response.status == 403) {
-          props.flashMessageHandler(
-            "open",
-            flashTypesConstants.ERROR,
-            "You don't have Authorization to show that"
-          );
-        } else {
-          props.flashMessageHandler(
-            "open",
-            flashTypesConstants.ERROR,
-            "Something went wrong"
-          );
-        }
+        props.flashMessageHandler(
+          "open",
+          flashTypesConstants.ERROR,
+          "Something went wrong"
+        );
       });
 
     setModalOpen(false);
   };
 
+  // handle the activation of the edit fields
+  const handleActiveEdit = (e) => {
+    const departmentId = e && e.currentTarget.id;
+
+    setActiveEditID(activeEditID === departmentId ? null : departmentId);
+  };
+  
+
   return (
-    <div className="list-div">
+    <div className="list-div" style={openAddSection ? { marginTop: 0 } : {}}>
       <Modal open={modalOpen}>
         <div className="modal-style">
           <div className="modal-container">
@@ -170,6 +185,14 @@ const DepartmentList = (props) => {
           </div>
         </div>
       </Modal>
+      {openAddSection && (
+        <CreateDepartment
+          usersList={usersList}
+          listUpdated={listUpdated}
+          setListUpdated={setListUpdated}
+          setOpenAddSection={setOpenAddSection}
+        />
+      )}
       <div className="filter"></div>
       <div className="table-div">
         <div className="top-table">
@@ -209,30 +232,29 @@ const DepartmentList = (props) => {
               <TableBody>
                 {slice.map((department, index) => (
                   <TableRow className="tr-style" key={index}>
-                    <TableCell align="left">{department.departmentName}</TableCell>
-                    <TableCell align="left">{department.departmentHeadName}</TableCell>
-                    <TableCell align="left">{department.departmentDesc}</TableCell>
-                    <TableCell align="center">
-                      <div className="action-style">
-                        <Link to="/user/view" state={{ departmentId: department.id }}>
-                          <img src={viewIcon} />
-                        </Link>
-                        <Link to="/user/edit" state={{ departmentId: department.id }}>
-                          <img src={editIcon} />
-                        </Link>
-                        <img
-                          id={department.id}
-                          onClick={handleModalDelete}
-                          src={deleteIcon}
-                        />
-                      </div>
-                    </TableCell>
+                    {department.id === activeEditID ? (
+                      <EditDepartment
+                        department={department}
+                        usersList={usersList}
+                        setListUpdated={setListUpdated}
+                        listUpdated={listUpdated}
+                        handleActiveEdit={handleActiveEdit}
+                        handleModalDelete={handleModalDelete}
+                      />
+                    ) : (
+                      <ViewDepartment
+                        department={department}
+                        handleModalDelete={handleModalDelete}
+                        handleActiveEdit={handleActiveEdit}
+                        usersList={usersList}
+                      />
+                    )}
                   </TableRow>
                 ))}
               </TableBody>
               <TableHead className="table-head-style">
                 <TableRow>
-                <TableCell>Department</TableCell>
+                  <TableCell>Department</TableCell>
                   <TableCell align="left">Department Head</TableCell>
                   <TableCell align="left">Department Description</TableCell>
                   <TableCell align="center">Action</TableCell>

@@ -1,9 +1,11 @@
-import axios from "axios";
+import customAxios from "axios";
 import { userService } from "./services/userService";
 import { authHeader } from "./helpers/auth-helper";
 import reduxStore from "./store";
 
 const { dispatch } = reduxStore;
+
+const axios = customAxios.create();
 
 axios.interceptors.request.use(
   (config) => {
@@ -20,7 +22,6 @@ axios.interceptors.response.use(
     return res;
   },
   async (error) => {
-
     // if the accesstoken expired then logout and reload to go to logout page
     if (error.response.status === 401) {
       // auto logout if 401 response returned from api

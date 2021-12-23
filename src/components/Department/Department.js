@@ -15,6 +15,8 @@ const Department = ({ component: Component }) => {
 
   const {pathname} = useLocation()
 
+  const [openAddSection, setOpenAddSection] = useState(false)
+
   const [activeRoute, setActiveRoute] = useState(routes[0])
 
   useEffect(() => {
@@ -23,8 +25,8 @@ const Department = ({ component: Component }) => {
 
   return (
     <div>
-      <HeaderBar categoryName="Department" mainRoute="department" pageName={activeRoute.pageName} onePage={true} showAdd={activeRoute.showAdd} />
-      <Component />
+      <HeaderBar categoryName="Department" mainRoute="department" pageName={activeRoute.pageName} onePage={true} showAdd={activeRoute.showAdd} setOpenAddSection={setOpenAddSection} openAddSection={openAddSection} />
+      <Component openAddSection={openAddSection} setOpenAddSection={setOpenAddSection} />
     </div>
   );
 };

@@ -1,0 +1,60 @@
+.createContainer  {
+    padding: 1rem 15rem;
+}
+
+.createContainer input{
+    background-color: var(--white-color);
+    border: 1px solid var(--gray-color);
+    border-radius: 10px;
+    height: 2rem;
+}
+
+.fieldLabel {
+    margin-right: 5rem;
+    font-size: var(--h3-size);
+    color: var(--gray-color);
+}
+
+.selectField {
+    background-color: var(--white-color) !important;
+    font-size: var(--body-size) !important;
+    font-weight: var(--medium-weight) !important;
+    width: 640px;
+    height: 3rem;
+}
+
+.editField input {
+    height: 1.8rem;
+    font-size: var(--body-size);
+    font-weight: var(--medium-weight);
+}
+
+.addDepartmentButtonContainer{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.actionStyle{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 5.5rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.actionStyle img{
+    margin-left: .5rem;
+}
+
+.actionStyle img:hover{
+    cursor: pointer;
+}
+
+.editSaveButton {
+    margin-left: 1.5rem;
+}
+
+.activeIconStyle {
+    margin-right: .5rem;
+    filter: invert(58%) sepia(65%) saturate(6872%) hue-rotate(207deg) brightness(105%) contrast(96%);
+}

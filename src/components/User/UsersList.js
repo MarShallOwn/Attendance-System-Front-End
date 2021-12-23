@@ -63,19 +63,11 @@ const UsersList = (props) => {
       })
       .catch((err) => {
         console.log(err.response.status)
-        if (err.response.status == 403) {
-          props.flashMessageHandler(
-            "open",
-            flashTypesConstants.ERROR,
-            "You don't have Authorization to show that"
-          );
-        } else {
           props.flashMessageHandler(
             "open",
             flashTypesConstants.ERROR,
             "Something went wrong"
           );
-        }
       });
   }, [listUpdated]);
 
@@ -131,19 +123,11 @@ const UsersList = (props) => {
       })
       .catch((err) => {
         setModalOpen(false);
-        if (err.response.status == 403) {
-          props.flashMessageHandler(
-            "open",
-            flashTypesConstants.ERROR,
-            "You don't have Authorization to show that"
-          );
-        } else {
           props.flashMessageHandler(
             "open",
             flashTypesConstants.ERROR,
             "Something went wrong"
           );
-        }
       });
 
     setModalOpen(false);

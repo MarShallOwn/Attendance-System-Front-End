@@ -10,6 +10,7 @@ import { flashActions } from "../../actions/flashMessageAction";
 import { flashTypesConstants } from "../../constants";
 import { useNavigate, Link } from "react-router-dom";
 import HolidayForm from "./HolidayForm";
+import moment from "moment"
 
 const CreateHoliday = (props) => {
   const navigate = useNavigate();
@@ -63,7 +64,7 @@ const CreateHoliday = (props) => {
     if (!handleValidation(fields, setErrors)) return;
 
     customAxios
-      .post("/holiday/create/", { ...fields })
+      .post("/holiday/create", { ...fields })
       .then((res) => {
         if (res.status === 201) {
           props.flashMessageHandler(
@@ -81,20 +82,12 @@ const CreateHoliday = (props) => {
         }
       })
       .catch((err) => {
-        if (err.response.status == 403) {
-          props.flashMessageHandler(
-            "open",
-            flashTypesConstants.ERROR,
-            "You don't have Authorization to show that"
-          );
-        } else {
           props.flashMessageHandler(
             "open",
             flashTypesConstants.ERROR,
             "Something went wrong"
           );
           handleValidation(err.response.data.error, setErrors, true);
-        }
       });
   };
 
