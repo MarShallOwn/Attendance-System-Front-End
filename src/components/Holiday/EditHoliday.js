@@ -52,19 +52,11 @@ const EditHoliday = (props) => {
         }
       })
       .catch((err) => {
-        if (err.response.status == 403) {
-          props.flashMessageHandler(
-            "open",
-            flashTypesConstants.ERROR,
-            "You don't have Authorization to show that"
-          );
-        } else {
           props.flashMessageHandler(
             "open",
             flashTypesConstants.ERROR,
             "Something went wrong"
           );
-        }
       });
   }, [state]);
 
@@ -130,19 +122,11 @@ const EditHoliday = (props) => {
       })
       .catch((err) => {
         setModalOpen(false);
-        if (err.response.status == 403) {
-          props.flashMessageHandler(
-            "open",
-            flashTypesConstants.ERROR,
-            "You don't have Authorization to show that"
-          );
-        } else {
           props.flashMessageHandler(
             "open",
             flashTypesConstants.ERROR,
             "Something went wrong"
           );
-        }
       });
 
     setModalOpen(false);
@@ -173,20 +157,12 @@ const EditHoliday = (props) => {
         }
       })
       .catch((err) => {
-        if (err.response.status == 403) {
-          props.flashMessageHandler(
-            "open",
-            flashTypesConstants.ERROR,
-            "You don't have Authorization to show that"
-          );
-        } else {
           props.flashMessageHandler(
             "open",
             flashTypesConstants.ERROR,
             "Something went wrong"
           );
           handleValidation(err.response.data.error, setErrors, true, true);
-        }
       });
   };
 

@@ -55,19 +55,11 @@ const EditUser = (props) => {
         }
       })
       .catch((err) => {
-        if (err.response.status == 403) {
-          props.flashMessageHandler(
-            "open",
-            flashTypesConstants.ERROR,
-            "You don't have Authorization to show that"
-          );
-        } else {
           props.flashMessageHandler(
             "open",
             flashTypesConstants.ERROR,
             "Something went wrong"
           );
-        }
       });
   }, [state]);
 
@@ -122,19 +114,11 @@ const EditUser = (props) => {
       })
       .catch((err) => {
         setModalOpen(false);
-        if (err.response.status == 403) {
-          props.flashMessageHandler(
-            "open",
-            flashTypesConstants.ERROR,
-            "You don't have Authorization to show that"
-          );
-        } else {
           props.flashMessageHandler(
             "open",
             flashTypesConstants.ERROR,
             "Something went wrong"
           );
-        }
       });
 
     setModalOpen(false);
@@ -149,7 +133,7 @@ const EditUser = (props) => {
     customAxios
       .put(`/auth/employer/edit/${state.userId}`, { ...fields })
       .then((res) => {
-        if (res.status === 201) {
+        if (res.status === 204) {
           props.flashMessageHandler(
             "open",
             flashTypesConstants.SUCCESS,
@@ -165,20 +149,12 @@ const EditUser = (props) => {
         }
       })
       .catch((err) => {
-        if (err.response.status == 403) {
-          props.flashMessageHandler(
-            "open",
-            flashTypesConstants.ERROR,
-            "You don't have Authorization to show that"
-          );
-        } else {
           props.flashMessageHandler(
             "open",
             flashTypesConstants.ERROR,
             "Something went wrong"
           );
           handleValidation(err.response.data.error, setErrors, true, true);
-        }
       });
   };
 

@@ -1,8 +1,8 @@
-import authAxios from "../customAxios";
+import axios from 'axios'
 
 const login = (email, password) => {
   return new Promise((resolve, reject) => {
-    authAxios
+    axios
       .post("/auth/login", { email, password })
       .then((res) => {
         if (res.status === 200) {
@@ -22,7 +22,7 @@ const logout = () => {
 };
 
 const handleUnAuth = (err) => {
-  if (err.response.status === 401) {
+  if (err.response.status === 403) {
     logout();
     window.location.reload(true);
   }

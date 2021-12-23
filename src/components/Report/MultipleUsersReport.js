@@ -61,19 +61,11 @@ const MultipleUsersReport = (props) => {
         }
       })
       .catch((err) => {
-        if (err.response.status == 403) {
-          props.flashMessageHandler(
-            "open",
-            flashTypesConstants.ERROR,
-            "You don't have Authorization to show that"
-          );
-        } else {
           props.flashMessageHandler(
             "open",
             flashTypesConstants.ERROR,
             "Something went wrong"
           );
-        }
       });
   }, [listUpdated]);
 

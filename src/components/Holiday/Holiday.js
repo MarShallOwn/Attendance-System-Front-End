@@ -38,7 +38,7 @@ const Holiday = ({ component: Component }) => {
 
   return (
     <div>
-      <HeaderBar categoryName="Holiday" mainRoute="holiday" pageName={activeRoute.pageName} />
+      <HeaderBar categoryName="Holiday" mainRoute="holiday" pageName={activeRoute.pageName} showAdd={activeRoute.showAdd} />
       <Component />
     </div>
   );
